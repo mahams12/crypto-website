@@ -1,0 +1,361 @@
+@import './styles/variables.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom base styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: var(--font-family-primary);
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--color-scrollbar-track);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-scrollbar-thumb);
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-scrollbar-thumb-hover);
+  }
+  
+  /* Selection styles */
+  ::selection {
+    background-color: var(--color-primary);
+    color: #000000;
+  }
+}
+
+/* Custom component styles */
+@layer components {
+  .container {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 1400px;
+  }
+  
+  /* Button variants */
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    focus-ring-offset-color: var(--color-background);
+  }
+  
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: #000000;
+    border: 1px solid var(--color-primary);
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--color-primary-hover);
+  }
+  
+  .btn-secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+  }
+  
+  .btn-secondary:hover {
+    background-color: var(--color-secondary-hover);
+    border-color: var(--color-border-hover);
+  }
+  
+  .btn-ghost {
+    color: var(--color-text-secondary);
+    background-color: transparent;
+  }
+  
+  .btn-ghost:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-text-primary);
+  }
+  
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+  
+  .btn-lg {
+    @apply px-6 py-3 text-base;
+  }
+  
+  /* Card variants */
+  .card {
+    background-color: var(--color-card-background);
+    border: 1px solid var(--color-border);
+    @apply rounded-xl p-6;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-200;
+  }
+  
+  .card-hover:hover {
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-card-hover);
+  }
+  
+  /* Input styles */
+  .input {
+    @apply w-full px-3 py-2 rounded-lg transition-colors;
+    background-color: var(--color-input-background);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+  }
+  
+  .input::placeholder {
+    color: var(--color-text-placeholder);
+  }
+  
+  .input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-shadow);
+  }
+  
+  /* Table styles */
+  .table {
+    @apply w-full border-collapse;
+  }
+  
+  .table th {
+    @apply px-4 py-3 text-left text-xs font-medium uppercase tracking-wider;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .table td {
+    @apply px-4 py-4;
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .table tr:hover {
+    background-color: var(--color-secondary);
+  }
+  
+  /* Price change indicators */
+  .price-positive {
+    color: var(--color-success);
+  }
+  
+  .price-negative {
+    color: var(--color-danger);
+  }
+  
+  .price-neutral {
+    color: var(--color-text-secondary);
+  }
+  
+  /* Loading states */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--color-skeleton-base) 25%,
+      var(--color-skeleton-highlight) 50%,
+      var(--color-skeleton-base) 75%
+    );
+    background-size: 200px 100%;
+    animation: shimmer 2s infinite;
+    @apply rounded;
+  }
+  
+  .skeleton-text {
+    @apply h-4 w-full;
+    background: linear-gradient(
+      90deg,
+      var(--color-skeleton-base) 25%,
+      var(--color-skeleton-highlight) 50%,
+      var(--color-skeleton-base) 75%
+    );
+    background-size: 200px 100%;
+    animation: shimmer 2s infinite;
+  }
+  
+  .skeleton-circle {
+    @apply w-10 h-10 rounded-full;
+    background: linear-gradient(
+      90deg,
+      var(--color-skeleton-base) 25%,
+      var(--color-skeleton-highlight) 50%,
+      var(--color-skeleton-base) 75%
+    );
+    background-size: 200px 100%;
+    animation: shimmer 2s infinite;
+  }
+  
+  /* Animations */
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  /* Glassmorphism effect */
+  .glass {
+    background: var(--color-glass-background);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--color-glass-border);
+  }
+  
+  /* Glowing border effect */
+  .glow-border {
+    position: relative;
+  }
+  
+  .glow-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: var(--gradient-primary);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+  
+  /* Custom focus styles */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+    focus-ring-color: var(--color-primary);
+    focus-ring-offset-color: var(--color-background);
+  }
+
+  /* Yellow hover utility classes */
+  .ct-hover-yellow:hover {
+    color: var(--color-primary) !important;
+  }
+
+  .ct-bg-hover-yellow:hover {
+    background-color: var(--color-primary) !important;
+    color: #000000 !important;
+  }
+}
+
+/* Utility classes */
+@layer utilities {
+  /* Text utilities */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Layout utilities */
+  .center {
+    @apply flex items-center justify-center;
+  }
+  
+  .between {
+    @apply flex items-center justify-between;
+  }
+  
+  /* Animation utilities */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  /* Responsive utilities */
+  .responsive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  }
+  to {
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+/* Responsive breakpoints */
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
+  
+  .table th,
+  .table td {
+    @apply px-2 py-2 text-sm;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    @apply bg-white text-black;
+  }
+}

@@ -1,0 +1,376 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom base styles with Cointelegraph colors - White Background */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-white text-black;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  
+  /* Custom scrollbar with yellow accent */
+  ::-webkit-scrollbar {
+    @apply w-1.5 h-1.5;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-200;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-500;
+  }
+  
+  /* Selection styles with yellow */
+  ::selection {
+    @apply bg-primary-500 text-black;
+  }
+}
+
+/* Hide blue category headers */
+@layer components {
+  /* Remove blue category navigation */
+  .category-tabs,
+  .category-nav,
+  .news-category-tabs,
+  .category-header,
+  .tabs-container,
+  .bg-blue-500,
+  .bg-blue-600,
+  [style*="background: blue"],
+  [style*="background-color: blue"],
+  [class*="bg-blue"] {
+    display: none !important;
+  }
+  
+  .container {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: 1400px;
+  }
+  
+  /* Button variants with yellow primary */
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-500 text-black hover:bg-primary-600 focus:ring-primary-500 font-semibold;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-100 text-gray-700 hover:bg-gray-200 focus:ring-gray-300 border border-gray-300;
+  }
+  
+  .btn-ghost {
+    @apply text-gray-600 hover:text-primary-500 hover:bg-gray-100 focus:ring-gray-300;
+  }
+  
+  .btn-outline {
+    @apply border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-black;
+  }
+  
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+  
+  .btn-lg {
+    @apply px-6 py-3 text-base;
+  }
+  
+  /* Card variants with light theme */
+  .card {
+    @apply bg-white rounded-xl border border-gray-200 p-6 shadow-sm;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-200 hover:bg-gray-50 hover:border-gray-300 hover:shadow-md;
+  }
+  
+  /* Input styles with light theme */
+  .input {
+    @apply w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors;
+  }
+  
+  /* Table styles with light theme */
+  .table {
+    @apply w-full border-collapse;
+  }
+  
+  .table th {
+    @apply px-4 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider border-b border-gray-200;
+  }
+  
+  .table td {
+    @apply px-4 py-4 border-b border-gray-100;
+  }
+  
+  .table tr:hover {
+    @apply bg-gray-50;
+  }
+  
+  /* Price change indicators */
+  .price-positive {
+    @apply text-green-600;
+  }
+  
+  .price-negative {
+    @apply text-red-600;
+  }
+  
+  .price-neutral {
+    @apply text-gray-600;
+  }
+  
+  /* Loading states with light theme */
+  .skeleton {
+    @apply bg-gray-200 animate-pulse rounded;
+  }
+  
+  .skeleton-text {
+    @apply skeleton h-4 w-full;
+  }
+  
+  .skeleton-circle {
+    @apply skeleton w-10 h-10 rounded-full;
+  }
+  
+  /* Animations */
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  /* Gradient text with yellow */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-500 to-primary-600 bg-clip-text text-transparent;
+  }
+  
+  /* Glassmorphism effect with light theme */
+  .glass {
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+  }
+  
+  /* Glowing border effect with yellow */
+  .glow-border {
+    position: relative;
+  }
+  
+  .glow-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: linear-gradient(45deg, #FFD700, #FFED4A);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+  
+  /* Custom focus styles with yellow */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-white;
+  }
+  
+  /* Header specific styles */
+  .header-bg {
+    @apply bg-black/95 backdrop-blur-lg border-b border-gray-200;
+  }
+  
+  .nav-link {
+    @apply relative px-3 py-2 text-sm font-medium transition-colors text-white hover:text-primary-500;
+  }
+  
+  .nav-link.active {
+    @apply text-primary-500;
+  }
+  
+  /* Logo styles */
+  .logo-bg {
+    @apply bg-primary-500;
+  }
+  
+  .logo-text {
+    @apply text-black;
+  }
+  
+  /* Price ticker styles */
+  .ticker-bg {
+    @apply bg-primary-500 border-b border-primary-600;
+  }
+  
+  /* News card styles */
+  .news-card {
+    @apply bg-white border border-gray-200 rounded-xl p-6 hover:border-gray-300 hover:shadow-md transition-all duration-200;
+  }
+  
+  .news-title {
+    @apply text-black hover:text-primary-500 transition-colors;
+  }
+  
+  .news-meta {
+    @apply text-gray-600 text-sm;
+  }
+  
+  /* Category tags with yellow accent */
+  .category-tag {
+    @apply bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs hover:bg-primary-500 hover:text-black transition-colors;
+  }
+  
+  /* Search styles */
+  .search-input {
+    @apply bg-white border border-gray-300 text-black placeholder-gray-500 focus:border-primary-500;
+  }
+}
+
+/* Utility classes */
+@layer utilities {
+  /* Text utilities */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Layout utilities */
+  .center {
+    @apply flex items-center justify-center;
+  }
+  
+  .between {
+    @apply flex items-center justify-between;
+  }
+  
+  /* Animation utilities */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  /* Responsive utilities */
+  .responsive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  /* Yellow accent utilities */
+  .accent-yellow {
+    @apply text-primary-500;
+  }
+  
+  .bg-accent-yellow {
+    @apply bg-primary-500 text-black;
+  }
+  
+  .border-accent-yellow {
+    @apply border-primary-500;
+  }
+  
+  .hover-accent-yellow:hover {
+    @apply text-primary-500;
+  }
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  }
+  to {
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+  }
+}
+
+/* Responsive breakpoints */
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
+  
+  .table th,
+  .table td {
+    @apply px-2 py-2 text-sm;
+  }
+  
+  .card {
+    @apply p-4;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    @apply bg-white text-black;
+  }
+}
+
+/* Number formatting for crypto prices */
+.crypto-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-feature-settings: "tnum";
+}
+
+/* Shimmer loading animation */
+.shimmer {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200px 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
