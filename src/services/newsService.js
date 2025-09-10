@@ -1,14 +1,15 @@
 // src/services/newsService.js
 import axios from "axios";
 
-const API_URL = "https://api.coinstats.app/public/v1/news/latest?skip=0&limit=12";
+// Add a public CORS proxy
+const CORS_PROXY = "https://api.allorigins.win/raw?url="; // free, simple proxy
 
 export const newsService = {
-  async fetchLatestNews() {
+  fetchLatestNews: async () => {
     try {
-      const response = await axios.get(API_URL);
-      console.log("📰 DEBUG NEWS DATA:", response.data);
-      return response.data.news || [];
+      const url = encodeURIComponent("https://api.coinstats.app/public/v1/news/latest?skip=0&limit=12");
+      const response = await axios.get(`${CORS_PROXY}${url}`);
+      return response.data?.data || []; // CoinStats API returns { data: [...] }
     } catch (error) {
       console.error("❌ Error fetching CoinStats news:", error);
       return [];
