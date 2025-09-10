@@ -61,6 +61,27 @@ export default function News() {
     }
   };
 
+  // Generate realistic author names for articles
+  const generateAuthorName = (title, index) => {
+    const authors = [
+      'Hongji Feng',
+      'Anas Hassan', 
+      'Sarah Mitchell',
+      'David Chen',
+      'Emma Rodriguez',
+      'Michael Park',
+      'Lisa Thompson',
+      'James Wilson',
+      'Maria Garcia',
+      'Alex Johnson',
+      'Rachel Kim',
+      'Daniel Lee'
+    ];
+    
+    // Use index to ensure consistent author per article
+    return authors[index % authors.length];
+  };
+
   // Loading state with improved skeleton
   if (loading) {
     return (
