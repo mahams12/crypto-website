@@ -1,100 +1,29 @@
-// src/services/api.js
 import axios from "axios";
 
-// ----------------------
-// CoinGecko API (prices)
-// ----------------------
-const COINGECKO_API = "https://api.coingecko.com/api/v3";
+// Base URL from environment variables or fallback
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://api.coingecko.com/api/v3";
 
-// ----------------------
-// CryptoPanic API (news)
-// ----------------------
-const CRYPTOPANIC_API = "https://cryptopanic.com/api/v1/posts/";
-// 👉 Replace "demo" with your real API key from cryptopanic.com
-const CRYPTOPANIC_KEY = "demo";
+// Create axios instance
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  timeout: 10000,
+});
 
-// ---------------
-// Crypto Service
-// ---------------
+// ---- Crypto API helpers ----
 export const cryptoService = {
-  getCoins: async (page = 1, limit = 20, sortBy = "market_cap_rank") => {
-    const order =
-      sortBy === "market_cap_rank" ? "market_cap_desc" : "volume_desc";
-
-    const { data } = await axios.get(`${COINGECKO_API}/coins/markets`, {
-      params: {
-        vs_currency: "usd",
-        order,
-        per_page: limit,
-        page,
-        sparkline: false,
-        price_change_percentage: "24h",
-      },
-    });
-    return { data };
-  },
-
-  getCoin: async (coinId) => {
-    const { data } = await axios.get(`${COINGECKO_API}/coins/${coinId}`, {
-      params: { localization: false, sparkline: false },
-    });
-    return { data };
-  },
-
-  getCoinHistory: async (coinId, days = 7) => {
-    const { data } = await axios.get(
-      `${COINGECKO_API}/coins/${coinId}/market_chart`,
-      { params: { vs_currency: "usd", days } }
-    );
-    return { data: data.prices };
-  },
-
-  getTrendingCoins: async (limit = 10) => {
-    const { data } = await axios.get(`${COINGECKO_API}/search/trending`);
-    return { data: data.coins.slice(0, limit).map((c) => c.item) };
-  },
+  getCoins: (params) => api.get("/coins/markets", { params }),
+  getCoinDetails: (id) => api.get(`/coins/${id}`),
+  getCoinHistory: (id, params) => api.get(`/coins/${id}/market_chart`, { params }),
+  getMarketStats: () => api.get("/global"),
 };
 
-// ---------------
-// News Service
-// ---------------
+// ---- News API helpers ----
 export const newsService = {
-  getNews: async (page = 1, limit = 20, category = "all") => {
-    const { data } = await axios.get(CRYPTOPANIC_API, {
-      params: {
-        auth_token: CRYPTOPANIC_KEY,
-        filter: category,
-        page,
-      },
-    });
-    return {
-      data: {
-        data: data.results,
-        total_pages: Math.ceil(data.count / limit),
-      },
-    };
-  },
-
-  getLatestNews: async (limit = 10) => {
-    const { data } = await axios.get(CRYPTOPANIC_API, {
-      params: { auth_token: CRYPTOPANIC_KEY, filter: "all", page: 1 },
-    });
-    return { data: data.results.slice(0, limit) };
-  },
-
-  getNewsByCategory: async (category, page = 1, limit = 20) => {
-    return newsService.getNews(page, limit, category);
-  },
-
-  getNewsCategories: async () => {
-    return {
-      data: {
-        categories: [
-          { name: "all", count: 0 },
-          { name: "news", count: 0 },
-          { name: "media", count: 0 },
-        ],
-      },
-    };
-  },
+  getNews: (params) => api.get("/news", { params }), // <-- replace with real news API endpoint if you have one
 };
+
+// Default export for existing imports
+export default api;
